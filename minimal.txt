@@ -1,0 +1,9 @@
+help
+ChatStata
+CopyUser
+DumpUsers
+Sender
+QiwiMod
+Sender
+Randomizer
+ChatVoiceMod
