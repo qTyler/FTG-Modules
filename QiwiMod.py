@@ -60,19 +60,19 @@ class QiwiMod(loader.Module):
         self.config = loader.ModuleConfig(
             loader.ConfigValue( # self.config["qiwi_phone"]
                 "qiwi_phone",
-                12,
+                "None",
                 lambda: self.strings("_cfg_qiwi_phone"),
                 validator=loader.validators.String(),
             ),
             loader.ConfigValue( # self.config["qiwi_token"]
                 "qiwi_token",
-                32,
+                "None",
                 lambda: self.strings("_cfg_qiwi_token"),
                 validator=loader.validators.String(),
             ),
             loader.ConfigValue( # self.config["qiwi_p2p_token"]
                 "qiwi_p2p_token",
-                32,
+                "None",
                 lambda: self.strings("_cfg_qiwi_p2p_token"),
                 validator=loader.validators.String(),
             )
@@ -107,15 +107,15 @@ class QiwiMod(loader.Module):
 
         return wrapper
 
-    async def qsetp2pcmd(self, m: types.Message):
-        """ <TOKEN>
-        Установить секретный p2p ключ"""
-        if args := utils.get_args(m):
-            self.db.set(self._db,"p2p", args[0])
-            return await utils.answer(
-                m, self.strings("p2p_setted_successfully").format(self.strings("pref"))
-            )
-        await utils.answer(m, self.strings("need_arg").format(self.strings("pref")))
+    #async def qsetp2pcmd(self, m: types.Message):
+    #    """ <TOKEN>
+    #    Установить секретный p2p ключ"""
+    #    if args := utils.get_args(m):
+    #        self.db.set(self._db,"p2p", args[0])
+    #        return await utils.answer(
+    #            m, self.strings("p2p_setted_successfully").format(self.strings("pref"))
+    #        )
+    #    await utils.answer(m, self.strings("need_arg").format(self.strings("pref")))
 
     # async def qsetcmd(self, m: types.Message):
         # """ <phone> <TOKEN>
