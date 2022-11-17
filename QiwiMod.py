@@ -62,19 +62,19 @@ class QiwiMod(loader.Module):
                 "qiwi_phone",
                 12,
                 lambda: self.strings("_cfg_qiwi_phone"),
-                validator=loader.validators.String(minimum=12),
+                validator=loader.validators.String(),
             ),
             loader.ConfigValue( # self.config["qiwi_token"]
                 "qiwi_token",
                 32,
                 lambda: self.strings("_cfg_qiwi_token"),
-                validator=loader.validators.String(minimum=32),
+                validator=loader.validators.String(),
             ),
             loader.ConfigValue( # self.config["qiwi_p2p_token"]
                 "qiwi_p2p_token",
                 32,
                 lambda: self.strings("_cfg_qiwi_p2p_token"),
-                validator=loader.validators.String(minimum=32),
+                validator=loader.validators.String(),
             )
         )    
                 
