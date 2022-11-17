@@ -41,9 +41,9 @@ class DUsersMod(loader.Module):
         self._client = client
 
     async def ducmd(self, message):
-        """ <n> <m> <s>
+        """ <nn> <n> <m> <s>
         Дамп юзеров чата
-        <n> - Получить всех пользователей без @usernames
+        <nn> - Получить всех пользователей без @usernames
         <n> - Получить только пользователей с открытыми номерами
         <m> - Отправить дамп в избранное
         <s> - Тихий дамп
