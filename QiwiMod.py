@@ -132,7 +132,7 @@ class QiwiMod(loader.Module):
     @__need_token
     async def qbalcmd(self, m: types.Message):
         " - Получить баланс"
-        async with QiwiWrapper(self.config["qiwi_token"], self.config["qiwi_phone"]) as w:
+        async with QiwiWrapper(self.config["qiwi_token"], "+" + self.config["qiwi_phone"]) as w:
             w: QiwiWrapper
             bal = await w.get_balance()
             await utils.answer(
