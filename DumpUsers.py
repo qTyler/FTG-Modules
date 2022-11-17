@@ -75,15 +75,13 @@ class DUsersMod(loader.Module):
         f.write("FIRST NAME;LAST NAME;@USERNAME;USER ID;PHONE NUMBER\n".encode())
         me = await message.client.get_me()
         for i in await message.client.get_participants(message.to_id):
-            line = ''
             if i.id == me.id:
                 continue
             if (nusr) and not i.username:
-                line = f"{str(i.first_name)};{str(i.last_name)};{str(i.username)};{str(i.id)};{str(i.phone)}\n".encode()
+                f.write(f"{str(i.first_name)};{str(i.last_name)};{str(i.username)};{str(i.id)};{str(i.phone)}\n".encode())
             elif (num) and i.phone or not (num):
-                line = f"{str(i.first_name)};{str(i.last_name)};{str(i.username)};{str(i.id)};{str(i.phone)}\n".encode()
-            
-            f.write(str(line))
+                f.write(f"{str(i.first_name)};{str(i.last_name)};{str(i.username)};{str(i.id)};{str(i.phone)}\n".encode())
+
         f.seek(0)
         if tome:
             await message.client.send_file("me", f, caption="Дамп чата " + str(chat.id))
