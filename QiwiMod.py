@@ -75,7 +75,8 @@ class QiwiMod(loader.Module):
                 32,
                 lambda: self.strings("_cfg_qiwi_p2p_token"),
                 validator=loader.validators.String(minimum=32),
-                
+            )
+        )    
                 
     async def client_ready(self, _, db):
         self.db = db
