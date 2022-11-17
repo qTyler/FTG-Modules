@@ -83,7 +83,7 @@ class DUsersMod(loader.Module):
             elif (num) and i.phone or not (num):
                 line = f"{str(i.first_name)};{str(i.last_name)};{str(i.username)};{str(i.id)};{str(i.phone)}\n".encode()
             
-            f.write(line)
+            f.write(str(line))
         f.seek(0)
         if tome:
             await message.client.send_file("me", f, caption="Дамп чата " + str(chat.id))
