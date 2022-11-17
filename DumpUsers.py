@@ -41,8 +41,9 @@ class DUsersMod(loader.Module):
         self._client = client
 
     async def ducmd(self, message):
-        """.du <n> <m> <s>
+        """ <n> <m> <s>
         Дамп юзеров чата
+        <n> - Получить всех пользователей без @usernames
         <n> - Получить только пользователей с открытыми номерами
         <m> - Отправить дамп в избранное
         <s> - Тихий дамп
@@ -52,10 +53,13 @@ class DUsersMod(loader.Module):
             return
         chat = message.chat
         num = False
+        nusr = False
         silent = False
         tome = False
         if utils.get_args_raw(message):
             a = utils.get_args_raw(message)
+            if "nn" in a:
+                nusr = True
             if "n" in a:
                 num = True
             if "s" in a:
@@ -68,15 +72,18 @@ class DUsersMod(loader.Module):
             await message.delete()
         f = io.BytesIO()
         f.name = f"Dump by {chat.id}.csv"
-        f.write("FNAME;LNAME;USER;ID;NUMBER\n".encode())
+        f.write("FIRST NAME;LAST NAME;@USERNAME;USER ID;PHONE NUMBER\n".encode())
         me = await message.client.get_me()
         for i in await message.client.get_participants(message.to_id):
+            line = ''
             if i.id == me.id:
                 continue
-            if (num) and i.phone or not (num):
-                f.write(
-                    f"{str(i.first_name)};{str(i.last_name)};{str(i.username)};{str(i.id)};{str(i.phone)}\n".encode()
-                )
+            if (nusr) and not i.username:
+                line = f"{str(i.first_name)};{str(i.last_name)};{str(i.username)};{str(i.id)};{str(i.phone)}\n".encode()
+            elif (num) and i.phone or not (num):
+                line = f"{str(i.first_name)};{str(i.last_name)};{str(i.username)};{str(i.id)};{str(i.phone)}\n".encode()
+            
+            f.write(line)
         f.seek(0)
         if tome:
             await message.client.send_file("me", f, caption="Дамп чата " + str(chat.id))
